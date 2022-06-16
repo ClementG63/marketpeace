@@ -2,6 +2,10 @@ server:
   error:
     include-exception: 'true'
     include-stacktrace: always
+marketpeace:
+  app:
+    jwtSecret: "marketpeacesecret"
+    jwtExpirationMs: 86400000
 spring:
   security:
     user:

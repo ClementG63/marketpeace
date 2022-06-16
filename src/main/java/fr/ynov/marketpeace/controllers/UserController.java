@@ -10,7 +10,7 @@ import fr.ynov.marketpeace.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-@RequestMapping(path = "/users")
+@RequestMapping(path = "/api/users")
 @SecurityRequirement(name = "bearerAuth")
 public class UserController {
     private final UserService userService;

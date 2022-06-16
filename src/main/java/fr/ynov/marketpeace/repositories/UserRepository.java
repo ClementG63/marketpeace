@@ -10,8 +10,13 @@ import org.springframework.data.repository.CrudRepository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findAll();
+    Optional<User> findUserByUsername(String username) throws UserNotFoundException;
     @Override
     Optional<User> findById(Long id) throws UserNotFoundException;
     @Override
     void deleteById(Long id);
+    @Override
+    boolean existsById(Long aLong);
+    boolean existsByUsername(String username);
+    boolean existsByMailAddress(String mailAddress);
 }

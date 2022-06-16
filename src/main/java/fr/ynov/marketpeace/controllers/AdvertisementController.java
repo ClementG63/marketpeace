@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/advertisements")
+@RequestMapping(path = "/api/advertisements")
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
 

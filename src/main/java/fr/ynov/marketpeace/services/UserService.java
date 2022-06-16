@@ -24,6 +24,10 @@ public record UserService(UserRepository repository) {
         return repository.findById(id);
     }
 
+    public Optional<User> findUserByUsername(String username) {
+        return repository.findUserByUsername(username);
+    }
+
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
