@@ -8,9 +8,12 @@ import fr.ynov.marketpeace.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
-public record UserService(UserRepository repository) {
+public class UserService {
+    private final UserRepository repository;
     @Autowired
-    public UserService {}
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public User save(User u) {
         return repository.save(u);

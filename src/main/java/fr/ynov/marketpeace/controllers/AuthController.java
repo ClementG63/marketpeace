@@ -17,6 +17,7 @@ import fr.ynov.marketpeace.request.SignupRequest;
 import fr.ynov.marketpeace.response.JwtResponse;
 import fr.ynov.marketpeace.response.MessageResponse;
 import fr.ynov.marketpeace.utils.JwtUtils;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,8 +53,8 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        var username = loginRequest.getUsername();
-        var password = loginRequest.getPassword();
+        final String username = loginRequest.getUsername();
+        final String password = loginRequest.getPassword();
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);

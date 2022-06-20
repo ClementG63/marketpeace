@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public record AdvertisementService(AdvertisementRepository repository) {
+public class AdvertisementService {
+    private final AdvertisementRepository repository;
+
     @Autowired
-    public AdvertisementService {}
+    public AdvertisementService(AdvertisementRepository repository) {
+        this.repository = repository;
+    }
 
     public Iterable<Advertisement> findAll() {
         return repository.findAll();
@@ -21,8 +25,8 @@ public record AdvertisementService(AdvertisementRepository repository) {
         );
     }
 
-    public Advertisement save(Advertisement u) {
-        return repository.save(u);
+    public void save(Advertisement u) {
+        repository.save(u);
     }
 
     public void deleteById(Long id) {
