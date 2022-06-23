@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) throws UserNotFoundException {
-        return userService.findUserById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+        return userService.findUserById(id);
     }
 
     @PutMapping

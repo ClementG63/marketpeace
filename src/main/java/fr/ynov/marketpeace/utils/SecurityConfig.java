@@ -17,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Security configurator
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,30 +27,57 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
 
+    /**
+     * Security configurator constructor
+     * @param userDetailsService Implementation of UserDetailService
+     * @param unauthorizedHandler JWT Entry point
+     */
     @Autowired
     SecurityConfig(UserDetailServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler){
         this.userDetailsService = userDetailsService;
         this.unauthorizedHandler = unauthorizedHandler;
     }
 
+    /**
+     * Filter JWT tokens in request
+     * @return Filter
+     */
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
+
+    /**
+     * Security Configrator.. config
+     * @param authenticationManagerBuilder
+     * @throws Exception
+     */
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    /**
+     * Password encoder
+     * @return encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
+    /**
+     * Configure API rules for entrypoint
+     * @param http Security
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()

@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
+/**
+ * Implementation of UserDetails (Spring)
+ */
 @Data
 @AllArgsConstructor
 @Getter
@@ -24,6 +28,9 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
+    /**
+     * Build user with User DTO {@link User}
+     */
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user
                 .getRoles()
@@ -39,6 +46,9 @@ public class UserDetailsImpl implements UserDetails {
                 authorities);
     }
 
+    /**
+     * UNUSED METHODS, NOT DEFINED
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;

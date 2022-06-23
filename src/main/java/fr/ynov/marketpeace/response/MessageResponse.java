@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Message response for API response
+ */
 @Data
 @Getter
 @Setter

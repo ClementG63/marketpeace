@@ -1,22 +1,25 @@
 package fr.ynov.marketpeace.auth;
 
-import fr.ynov.marketpeace.services.UserDetailServiceImpl;
-import fr.ynov.marketpeace.utils.JwtUtils;
 import org.slf4j.Logger;
+import java.io.IOException;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import fr.ynov.marketpeace.utils.JwtUtils;
+import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import fr.ynov.marketpeace.services.UserDetailServiceImpl;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+/**
+ * Auth checker for entry point access
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
@@ -24,6 +27,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private UserDetailServiceImpl userDetailsService;
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
+    /**
+     * Filter request
+     * @param request User request
+     * @param response User response
+     * @param filterChain Filter
+     * @throws ServletException Throws servlet exception
+     * @throws IOException Throws IO exception
+     */
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -49,6 +60,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+    /**
+     * Parse JWT from request, check if Bearer and get token
+     * @param request User request
+     * @return Return JWT token
+     */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-
 import fr.ynov.marketpeace.entities.ERole;
 import fr.ynov.marketpeace.entities.Role;
 import fr.ynov.marketpeace.entities.User;
@@ -17,7 +16,6 @@ import fr.ynov.marketpeace.request.SignupRequest;
 import fr.ynov.marketpeace.response.JwtResponse;
 import fr.ynov.marketpeace.response.MessageResponse;
 import fr.ynov.marketpeace.utils.JwtUtils;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Authentication controller
+ */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
@@ -42,6 +43,14 @@ public class AuthController {
     PasswordEncoder encoder;
     JwtUtils jwtUtils;
 
+    /**
+     * All args constructor
+     * @param authenticationManager Authentication manager
+     * @param userRepository User repository
+     * @param roleRepository Role repository
+     * @param encoder Password encoder
+     * @param jwtUtils Tool to manipulate JWT
+     */
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
@@ -51,6 +60,11 @@ public class AuthController {
         this.jwtUtils = jwtUtils;
     }
 
+    /**
+     * Authenticate user with input request
+     * @param loginRequest User request {@link LoginRequest}
+     * @return Response to send
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         final String username = loginRequest.getUsername();
@@ -72,6 +86,13 @@ public class AuthController {
                 roles)
         );
     }
+
+    /**
+     * Register user with incoming informations from request
+     * @param signUpRequest User request {@link SignupRequest}
+     * @return Response to send
+     * Throw bad request if username/mail is already taken
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -101,7 +122,7 @@ public class AuthController {
 
                 roles.add(userRole);
             } else {
-                for (var role : strRoles) {
+                for (String role : strRoles) {
                     if ("admin".equals(role)) {
                         Role adminRole = roleRepository
                                 .findByName(ERole.ROLE_ADMIN)

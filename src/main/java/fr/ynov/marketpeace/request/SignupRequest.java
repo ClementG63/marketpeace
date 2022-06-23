@@ -3,11 +3,12 @@ package fr.ynov.marketpeace.request;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Set;
-
 import javax.validation.constraints.*;
 
+/**
+ * Signup request for authentication
+ */
 @Data
 @Getter
 @Setter
