@@ -2,7 +2,6 @@ package fr.ynov.marketpeace.entities;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -22,20 +21,28 @@ public class Advertisement {
 
     @Column(name = "title", nullable = false)
     @Size(min = 3, max = 25)
-    String title;
+    private String title;
 
     @Column(name = "price", nullable = false)
     @Min(value = 0)
-    Float price;
+    private Float price;
 
     @Size(min = 10, max = 25)
     @Column(name = "description", nullable = false)
-    String description;
+    private String description;
 
     @Column(name = "image_url", nullable = false)
-    String imageUrl;
+    private String imageUrl;
 
     @Column(name = "owner_id", nullable = false)
     @Min(value = 0)
-    Long ownerId;
+    private Long ownerId;
+
+    public Advertisement(String title, Float price, String description, String imageUrl, Long ownerId) {
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.ownerId = ownerId;
+    }
 }

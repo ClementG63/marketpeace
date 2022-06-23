@@ -2,12 +2,14 @@ package fr.ynov.marketpeace.controllers;
 
 import fr.ynov.marketpeace.entities.Advertisement;
 import fr.ynov.marketpeace.services.AdvertisementService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/advertisements")
+@SecurityRequirement(name = "bearerAuth")
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
 
@@ -26,8 +28,8 @@ public class AdvertisementController {
         return advertisementService.findAdById(id);
     }
 
-    @PutMapping
-    public void saveAd(@RequestBody Advertisement ad){
+    @PostMapping
+    public void save(@RequestBody Advertisement ad){
         advertisementService.save(ad);
     }
 
