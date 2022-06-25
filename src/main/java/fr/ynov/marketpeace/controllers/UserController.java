@@ -1,14 +1,15 @@
 package fr.ynov.marketpeace.controllers;
 
-import java.util.List;
 import fr.ynov.marketpeace.entities.User;
 import fr.ynov.marketpeace.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import lombok.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import fr.ynov.marketpeace.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/users")
@@ -37,15 +38,15 @@ public class UserController {
         return null;
     }
 
-    @Operation(hidden = true)
-    @DeleteMapping("/{id}")
-    public void deleteUserById(@NonNull @PathVariable Long id){
-        userService.delete(id);
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public List<User> findAll(){
+        return userService.findAll();
     }
 
-    @Operation(hidden = true)
-    @GetMapping
-    public void findAll(){
-        userService.findAll();
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id){
+        userService.deleteUser(id);
     }
 }

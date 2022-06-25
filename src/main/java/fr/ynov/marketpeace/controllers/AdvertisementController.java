@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(path = "/api/advertisements")
-@SecurityRequirement(name = "bearerAuth")
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
 
@@ -72,6 +72,7 @@ public class AdvertisementController {
      */
     @Operation(description = "Delete advertisement associated to given id")
     @SecurityRequirement(name = "bearer")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable Long id){
         advertisementService.deleteById(id);

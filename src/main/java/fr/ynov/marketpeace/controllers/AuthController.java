@@ -17,7 +17,6 @@ import fr.ynov.marketpeace.response.JwtResponse;
 import fr.ynov.marketpeace.response.MessageResponse;
 import fr.ynov.marketpeace.utils.JwtUtils;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

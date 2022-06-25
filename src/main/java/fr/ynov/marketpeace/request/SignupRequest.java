@@ -3,8 +3,9 @@ package fr.ynov.marketpeace.request;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Set;
+
 import javax.validation.constraints.*;
+import java.util.Set;
 
 /**
  * Signup request for authentication
@@ -34,6 +35,6 @@ public class SignupRequest {
     @Email
     private String mail_address;
 
-    @NotBlank
+    @NotEmpty
     private Set<String> role;
 }

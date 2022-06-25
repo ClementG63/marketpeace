@@ -65,15 +65,8 @@ public class UserService {
         return repository.existsById(id);
     }
 
-    /**
-     * Delete user corresponding with given id
-     * @param id user's id
-     */
-    public void delete(Long id) {
-        if(findUserById(id) != null){
-            repository.deleteById(id);
-        } else {
-            throw new UserNotFoundException("User not found with id: "+id);
-        }
+    public void deleteUser(Long id){
+        repository.deleteById(id);
     }
+
 }
