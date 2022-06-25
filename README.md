@@ -1,92 +1,90 @@
-# MarketPeace
+# MarketPeace API
+**Créateur**: Clément GUYON
+**Ecole**: Ynov Lyon Campus
+**Formation**: Mastère Développement Logiciel, Mobile & IoT
+**Module**: Web Service
+**Groupe**: Travail réalisé **SEUL**.
+
+MarketPeace API est une application Web développée en **Java 8** avec le Framework **Spring Boot** (version 2.7.0) permettant aux utilisateurs de récupérer des données depuis une base de données **MySQL**.
+
+## Application Front
+
+L'application Flutter est disponible sur [ce GitHub](https://github.com/ClementG63/market_peace).
+
+## Endpoints et controllers
+
+### Advertisement controller
+Permet de manipuler les annonces (*Advertisement*) de l'application.
+**Endpoints disponibles et sécurité :**
+
+ - **findAll** via "GET /api/advertisements/", permet de récupérer toutes les annonces. ***Sécurité***: Aucun contrôle d'accès afin que même les utilisateurs non-connectés puissent récupérer les annonces afin de la afficher.
+ ***Retours possibles***: 200, même si vide.
+ 
+ - **findAdById** via "GET /api/advertisements/{id}" avec {id} correspondant à l'identifiant de l'annonce recherchée. Permet de récupérer une annonce spécifique, par exemple pour accéder aux détails d'une annonce [non implémentée]. 
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+
+ - **save** via "PUT /api/advertisements/" avec un body contenant l'annonce a créer ou modifier. Permet de créer une nouvelle annonce ou de mettre à jour une annonce existante. 
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+
+ - **deleteAd** via "DELETE /api/advertisements/{id}" avec {id} correspondant à l'identifiant de l'annonce à supprimer. Permet de supprimer une annonce. 
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+
+### User controller
+
+Permet de manipuler les utilisateurs (*Users*) de l'application.
+**Endpoints disponibles et sécurité :**
+
+ - **findUserById** via "GET /api/users/{id}" avec {id} correspondant à l'identifiant de l'utilisateur recherché. Permet de récupérer un utilisateur spécifique, par exemple pour accéder aux détails d'un utilisateur, afin d'afficher son profil [non implémentée]. 
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+
+ - **save** via "PUT /api/users/" avec un body contenant l'utilisateur a créer ou modifier. Permet de créer un nouvel utilisateur  ou de mettre à jour un utilisateur existant. 
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+
+ - **deleteUser** via "DELETE /api/users/{id}" avec {id} correspondant à l'identifiant de l'utilisateur à supprimer. Permet de supprimer un utilisateur. [***ndlr***: PAS UTILISABLE PAR LES UTILISATEURS NON-ADMIN.]
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound / 403 Forbidden
+
+### Auth controller
+
+ - **signin** via "POST /api/auth/signin". Permet à un utilisateur de se connecter, en récupérant ses informations utilisateurs ainsi que son Bearer Token.
+ ***Sécurité***: Pas de sécurité.
+  ***Retours possibles***: 200 OK /  401 Unauthorized (Bad Credentials)
+
+ - **signup** via "POST /api/auth/signup". Permet à un utilisateur de s'inscrire avec ses différentes informations dans le body.
+ ***Sécurité***: Pas de sécurité.
+  ***Retours possibles***: 200 OK /  401 Unauthorized
+
+### Test controller
+
+Permet de tester les accès par rôle.
+ - **all** via "GET /api/test/all". Test l'accès public.
+ ***Sécurité***: Pas de sécurité.
+  ***Retours possibles***: 200 OK
+
+ - **user** via "GET /api/test/user". Test l'accès USER et ADMIN.
+ ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized
+
+ - **admin** via "GET /api/test/admin". Test l'accès ADMIN.
+ ***Sécurité***:  Authentification par Bearer Token requise dans les headers de la requête.
+  ***Retours possibles***: 200 OK / 401 Unauthorized
+
+## Architecture du projet
+
+Voici une image présentant l'architecture de l'application.
+- Le client est développé en Flutter et - pour l'instant - testé sur Web et **Android**.
+- La base de données d'images utilisée est **Firebase Cloud Storage**, elle sert uniquement à stocker les images des annonces postées par les utilisateurs.
+- L'API est développée en **Spring Boot** avec **Java 8**, elle permet l'accès aux ressources stockées dans la base de données. Certains sécurités ont été mises en place, comme le contrôle d'accès par Bearer Token (JWT) ainsi que via des rôles d'utilisateurs (USER/ADMIN).
+- La base de données est une base MySQL avec 4 tables, (Advertisements, Roles, User_roles et Users)
 
 
+![enter image description here](https://media.discordapp.net/attachments/786644865437270038/990268949176385566/unknown.png)
 
-## Getting started
+## Schema de la base de données
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/ClementG631/marketpeace.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/ClementG631/marketpeace/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+![enter image description here](https://media.discordapp.net/attachments/786644865437270038/990272869634285568/unknown.png)
