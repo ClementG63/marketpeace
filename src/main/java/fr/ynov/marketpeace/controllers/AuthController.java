@@ -16,6 +16,8 @@ import fr.ynov.marketpeace.request.SignupRequest;
 import fr.ynov.marketpeace.response.JwtResponse;
 import fr.ynov.marketpeace.response.MessageResponse;
 import fr.ynov.marketpeace.utils.JwtUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -65,6 +67,7 @@ public class AuthController {
      * @param loginRequest User request {@link LoginRequest}
      * @return Response to send
      */
+    @Operation(description = "Sign in user with given credentials")
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         final String username = loginRequest.getUsername();
@@ -93,6 +96,7 @@ public class AuthController {
      * @return Response to send
      * Throw bad request if username/mail is already taken
      */
+    @Operation(description = "Sign up new user with given credentials")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {

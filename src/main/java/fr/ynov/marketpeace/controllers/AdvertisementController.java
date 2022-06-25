@@ -2,6 +2,7 @@ package fr.ynov.marketpeace.controllers;
 
 import fr.ynov.marketpeace.entities.Advertisement;
 import fr.ynov.marketpeace.services.AdvertisementService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class AdvertisementController {
      * Find all advertisements
      * @return all advertisements from database
      */
+    @Operation(description = "Return all advertisements in database")
     @GetMapping
     public Iterable<Advertisement> findAll(){
         return advertisementService.findAll();
@@ -42,6 +44,8 @@ public class AdvertisementController {
      * @return Return corresponding Advertisement or throw AdNotFoundException if there is no advertisement with the given id
      * {@link fr.ynov.marketpeace.exceptions.AdNotFoundException}
      */
+    @Operation(description = "Find advertisement associated to given id")
+    @SecurityRequirement(name = "bearer")
     @GetMapping("/{id}")
     public Advertisement findAdById(@NonNull @PathVariable Long id) {
         return advertisementService.findAdById(id);
@@ -53,6 +57,8 @@ public class AdvertisementController {
      * @param ad New advertisement to save
      * {@link fr.ynov.marketpeace.exceptions.AdNotFoundException}
      */
+    @Operation(description = "Save new advertisement or update existing one")
+    @SecurityRequirement(name = "bearer")
     @PutMapping
     public void save(@RequestBody Advertisement ad){
         advertisementService.save(ad);
@@ -64,6 +70,8 @@ public class AdvertisementController {
      * {@link fr.ynov.marketpeace.exceptions.AdNotFoundException}
      * @param id Advertisement's id to delete
      */
+    @Operation(description = "Delete advertisement associated to given id")
+    @SecurityRequirement(name = "bearer")
     @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable Long id){
         advertisementService.deleteById(id);
