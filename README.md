@@ -26,20 +26,28 @@ Permet de manipuler les annonces (*Advertisement*) de l'application.
 **Endpoints disponibles et sécurité :**
 
  - **findAll** via "GET /api/advertisements/", permet de récupérer toutes les annonces.
+ - 
  ***Sécurité***: Aucun contrôle d'accès afin que même les utilisateurs non-connectés puissent récupérer les annonces afin de la afficher.
+ 
  ***Retours possibles***: 200, même si vide.
  
  - **findAdById** via "GET /api/advertisements/{id}" avec {id} correspondant à l'identifiant de l'annonce recherchée. Permet de récupérer une annonce spécifique, par exemple pour accéder aux détails d'une annonce [non implémentée]. 
+
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
 
  - **save** via "PUT /api/advertisements/" avec un body contenant l'annonce a créer ou modifier. Permet de créer une nouvelle annonce ou de mettre à jour une annonce existante. 
+
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
 
  - **deleteAd** via "DELETE /api/advertisements/{id}" avec {id} correspondant à l'identifiant de l'annonce à supprimer. Permet de supprimer une annonce. 
+ 
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
 
 ### User controller
 
@@ -47,41 +55,57 @@ Permet de manipuler les utilisateurs (*Users*) de l'application.
 **Endpoints disponibles et sécurité :**
 
  - **findUserById** via "GET /api/users/{id}" avec {id} correspondant à l'identifiant de l'utilisateur recherché. Permet de récupérer un utilisateur spécifique, par exemple pour accéder aux détails d'un utilisateur, afin d'afficher son profil [non implémentée]. 
+ 
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
 
  - **save** via "PUT /api/users/" avec un body contenant l'utilisateur a créer ou modifier. Permet de créer un nouvel utilisateur  ou de mettre à jour un utilisateur existant. 
+ 
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound
 
  - **deleteUser** via "DELETE /api/users/{id}" avec {id} correspondant à l'identifiant de l'utilisateur à supprimer. Permet de supprimer un utilisateur. [***ndlr***: PAS UTILISABLE PAR LES UTILISATEURS NON-ADMIN.]
+ 
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound / 403 Forbidden
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized / 404 NotFound / 403 Forbidden
 
 ### Auth controller
 
  - **signin** via "POST /api/auth/signin". Permet à un utilisateur de se connecter, en récupérant ses informations utilisateurs ainsi que son Bearer Token.
+ 
  ***Sécurité***: Pas de sécurité.
-  ***Retours possibles***: 200 OK /  401 Unauthorized (Bad Credentials)
+ 
+ ***Retours possibles***: 200 OK /  401 Unauthorized (Bad Credentials)
 
  - **signup** via "POST /api/auth/signup". Permet à un utilisateur de s'inscrire avec ses différentes informations dans le body.
+ 
  ***Sécurité***: Pas de sécurité.
-  ***Retours possibles***: 200 OK /  401 Unauthorized
+ 
+ ***Retours possibles***: 200 OK /  401 Unauthorized
 
 ### Test controller
 
 Permet de tester les accès par rôle.
  - **all** via "GET /api/test/all". Test l'accès public.
+ 
  ***Sécurité***: Pas de sécurité.
-  ***Retours possibles***: 200 OK
+ 
+ ***Retours possibles***: 200 OK
 
  - **user** via "GET /api/test/user". Test l'accès USER et ADMIN.
+ 
  ***Sécurité***: Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized
 
  - **admin** via "GET /api/test/admin". Test l'accès ADMIN.
+ 
  ***Sécurité***:  Authentification par Bearer Token requise dans les headers de la requête.
-  ***Retours possibles***: 200 OK / 401 Unauthorized
+ 
+ ***Retours possibles***: 200 OK / 401 Unauthorized
 
 ## Architecture du projet
 
