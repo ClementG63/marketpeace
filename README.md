@@ -7,6 +7,10 @@
 
 MarketPeace API est une application Web développée en **Java 8** avec le Framework **Spring Boot** (version 2.7.0) permettant aux utilisateurs de récupérer des données depuis une base de données **MySQL**.
 
+## BASE DE DONNEES
+
+L'export de la base de données est disponible à la racine du répertoire sous le nom "marketpeacedb_export.sql"
+
 ## Application Front
 
 L'application Flutter est disponible sur [ce GitHub](https://github.com/ClementG63/market_peace).
