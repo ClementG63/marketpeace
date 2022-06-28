@@ -25,7 +25,8 @@ L'application Flutter est disponible sur [ce GitHub](https://github.com/ClementG
 Permet de manipuler les annonces (*Advertisement*) de l'application.
 **Endpoints disponibles et sécurité :**
 
- - **findAll** via "GET /api/advertisements/", permet de récupérer toutes les annonces. ***Sécurité***: Aucun contrôle d'accès afin que même les utilisateurs non-connectés puissent récupérer les annonces afin de la afficher.
+ - **findAll** via "GET /api/advertisements/", permet de récupérer toutes les annonces.
+ ***Sécurité***: Aucun contrôle d'accès afin que même les utilisateurs non-connectés puissent récupérer les annonces afin de la afficher.
  ***Retours possibles***: 200, même si vide.
  
  - **findAdById** via "GET /api/advertisements/{id}" avec {id} correspondant à l'identifiant de l'annonce recherchée. Permet de récupérer une annonce spécifique, par exemple pour accéder aux détails d'une annonce [non implémentée]. 
