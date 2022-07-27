@@ -9,6 +9,8 @@
 
 **Groupe**: Travail réalisé **SEUL**.
 
+**Note obtenue**: 15
+
 MarketPeace API est une application Web développée en **Java 8** avec le Framework **Spring Boot** (version 2.7.0) permettant aux utilisateurs de récupérer des données depuis une base de données **MySQL**.
 
 ## BASE DE DONNEES
