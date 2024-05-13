@@ -1,9 +1,3 @@
-# MarketPeace API
-**Créateur**: Clément GUYON
-
-**Ecole**: Ynov Lyon Campus
-
-**Formation**: Mastère Développement Logiciel, Mobile & IoT
 
 **Module**: Web Service
 
@@ -19,8 +13,7 @@ L'export de la base de données est disponible à la racine du répertoire sous 
 
 ## Application Front
 
-L'application Flutter est disponible sur [ce GitHub](https://github.com/ClementG63/market_peace).
-
+L'application Flutter est disponible sur mon github
 ## Endpoints et controllers
 
 ### Advertisement controller
